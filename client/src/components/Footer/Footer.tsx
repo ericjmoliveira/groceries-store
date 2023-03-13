@@ -3,7 +3,7 @@ import { Container } from './Footer.styled';
 const Footer = () => {
   return (
     <Container>
-      <span>&copy; 2022 Wowmart. All rights reserved.</span>
+      <span>&copy; {new Date().getFullYear()} Wowmart. All rights reserved.</span>
     </Container>
   );
 };
