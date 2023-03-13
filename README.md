@@ -1,6 +1,6 @@
-# Grocery Store
+# Groceries Store
 
-MERN stack e-commerce with design and products of Walmart
+MERN stack groceries e-commerce with design and products of Walmart
 
 - Main technologies used: MERN stack (MongoDB, Express, React, Node.js) + TypeScript
 - State Management with Context API and Hooks
