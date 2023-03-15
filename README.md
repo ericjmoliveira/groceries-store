@@ -10,4 +10,4 @@ MERN stack groceries e-commerce with design and products of Walmart
 
 Online project: https://wowmart.vercel.app
 
-Online API: https://wowmart.onrender.com
+Online API: https://apiwowmart.vercel.app
