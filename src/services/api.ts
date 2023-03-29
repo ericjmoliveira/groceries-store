@@ -10,6 +10,18 @@ if (token) {
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
+export async function getProducts() {
+  try {
+    const response = await api.get('/products');
+
+    return response.data as Response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data as Response;
+    }
+  }
+}
+
 export async function getUser() {
   try {
     const response = await api.get('/users');
