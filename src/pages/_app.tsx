@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useCartStore } from '@/store/cart';
 import { useProductsStore } from '@/store/products';
 import { useAuthStore } from '@/store/auth';
-
+import { Layout } from '@/components/layout';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -18,5 +18,9 @@ export default function App({ Component, pageProps }: AppProps) {
     handleAuthState();
   }, [handleAuthState, populateProductsList, populateCart]);
 
-  return <Component {...pageProps} />;
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
