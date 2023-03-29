@@ -4,6 +4,13 @@ export interface Cart {
   itemsList: Item[];
 }
 
+export interface Credentials {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+}
+
 export interface Item {
   id: string;
   name: string;
