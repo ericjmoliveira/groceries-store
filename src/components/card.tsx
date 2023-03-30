@@ -17,7 +17,14 @@ export function Card({ info }: CardProps) {
   return (
     <div className="flex flex-col">
       <Link href={`/${info.slug}`} className="mb-2">
-        <Image src={info.image} width={200} height={200} alt={info.name} priority />
+        <Image
+          src={info.image}
+          width={200}
+          height={200}
+          alt={info.name}
+          priority
+          className="w-auto h-auto"
+        />
       </Link>
       <Button parentComponent="card" id={info.id} quantity={quantity} />
       <span className="text-lg font-semibold">${(info.price / 100).toFixed(2)}</span>

@@ -10,13 +10,18 @@ export function Button({ parentComponent, id, quantity }: ButtonProps) {
   const handleCart = useCartStore((state) => state.handleCart);
 
   return (
-    <div className="w-3/4 md:w-2/4 h-9 flex items-center justify-center mb-2 p-2 bg-blue-600 text-white text-sm font-medium rounded-full shadow-md">
+    <div
+      className={`${
+        parentComponent === 'card' ? 'w-3/4 md:w-1/2' : 'w-2/4 md:w-1/4'
+      } h-9 flex items-center justify-center mb-2 p-2 bg-blue-600 text-white text-sm font-medium rounded-full shadow-md`}
+    >
       {quantity === 0 ? (
         <button
           onClick={(e) => {
             e.preventDefault();
             handleCart(id, true);
           }}
+          className="w-full"
         >
           + Add to cart
         </button>
