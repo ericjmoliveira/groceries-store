@@ -52,7 +52,7 @@ export default function Page({ data }: ProductProps) {
       <section className="flex flex-col md:flex-row justify-between gap-8 mt-8 mb-16">
         <Image src={data.image} width={400} height={400} alt={`${data.name} image`} priority />
         <div className="flex flex-col md:ml-8">
-          <span className="text-2xl font-semibold mb-4">{data.name}</span>
+          <h2 className="text-2xl font-semibold mb-4">{data.name}</h2>
           <span className="text-3xl font-semibold mb-4">${(data.price / 100).toFixed(2)}</span>
           <Button parentComponent="product" id={data.id} quantity={quantity} />
           <p className="font-medium mt-4 leading-8">{data.description}</p>

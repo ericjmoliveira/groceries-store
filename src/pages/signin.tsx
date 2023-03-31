@@ -31,7 +31,7 @@ export default function SignIn() {
         <Link href={'/'} className="flex flex-col items-center justify-center mb-2">
           <Image src={'/spark.png'} width={30} height={30} alt="Wowmart spark" />
         </Link>
-        <span className="text-lg font-semibold mb-8">Sign in to your Wowmart account</span>
+        <h2 className="text-lg font-semibold mb-8">Sign in to your Wowmart account</h2>
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mb-4">
           <section>
             <input
