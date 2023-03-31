@@ -43,7 +43,7 @@ export default function Cart() {
                 </div>
               </div>
               <div className="flex items-center gap-8">
-                <span className="font-medium">${item.subTotal.toFixed(2)}</span>
+                <span className="font-medium">${item.subtotal.toFixed(2)}</span>
                 <button onClick={() => handleCart(item.id, false, true)} className="underline">
                   Remove
                 </button>

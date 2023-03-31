@@ -18,7 +18,7 @@ export interface Item {
   price: number;
   image: string;
   quantity: number;
-  subTotal: number;
+  subtotal: number;
 }
 
 export interface Product {
@@ -52,5 +52,5 @@ export interface User {
   email: string;
   createdAt: string;
   updatedAt: string;
-  purchases: Purchase;
+  purchases: Purchase[];
 }

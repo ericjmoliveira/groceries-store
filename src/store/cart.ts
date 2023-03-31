@@ -42,7 +42,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
               price: newOrder.price / 100,
               slug: newOrder.slug,
               quantity: 1,
-              subTotal: newOrder.price / 100
+              subtotal: newOrder.price / 100
             });
 
             newData.totalPrice += newOrder.price / 100;
@@ -51,7 +51,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
           for (const item of newData.itemsList) {
             if (item.id === id) {
               item.quantity++;
-              item.subTotal = item.quantity * item.price!;
+              item.subtotal = item.quantity * item.price!;
               newData.totalPrice += item.price!;
             }
           }
@@ -68,7 +68,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
             } else {
               newData.totalItems--;
               item.quantity--;
-              item.subTotal = item.quantity * item.price!;
+              item.subtotal = item.quantity * item.price!;
               newData.totalPrice -= item.price!;
             }
 
