@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
 
 import { Header } from './header';
 import { Content } from './content';
@@ -9,9 +10,12 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { pathname } = useRouter();
+  const renderHeader = pathname !== '/signin' && pathname !== '/signup';
+
   return (
     <>
-      <Header />
+      {renderHeader && <Header />}
       <Content>{children}</Content>
       <Footer />
     </>
