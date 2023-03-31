@@ -64,6 +64,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
   handleSignOut() {
     removeToken();
-    Router.reload();
+    Router.push('/');
   }
 }));
