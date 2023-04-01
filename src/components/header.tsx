@@ -1,16 +1,28 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, FormEvent } from 'react';
+import { useRouter } from 'next/router';
 import { BsSearch, BsPersonFill, BsCart4 } from 'react-icons/bs';
 
 import { useAuthStore } from '@/store/auth';
 import { useCartStore } from '@/store/cart';
 
 export function Header() {
-  const searchRef = useRef<HTMLInputElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const user = useAuthStore((state) => state.user);
   const authenticated = useAuthStore((state) => state.authenticated);
   const { totalPrice, totalItems } = useCartStore((state) => state.data);
+  const router = useRouter();
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (!searchInputRef.current?.value.trim()) return;
+
+    const searchQuery = searchInputRef.current.value;
+
+    router.push(`/search?query=${searchQuery.trim().split(' ').join('-').toLowerCase()}`);
+  };
 
   return (
     <header className="sticky top-0 w-full flex items-center justify-between p-4 md:py-4 md:p-8 bg-blue-600 text-white shadow-md">
@@ -18,15 +30,18 @@ export function Header() {
         <span className="hidden md:block text-2xl font-medium">Wowmart</span>
         <Image src={'/spark.png'} width={33} height={33} alt="Wowmart spark" />
       </Link>
-      <form className="relative w-1/2 md:w-1/3 flex items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="relative w-1/2 md:w-1/3 flex items-center justify-center"
+      >
         <input
           type="text"
           placeholder="Search"
           required
-          ref={searchRef}
+          ref={searchInputRef}
           className="w-full px-4 py-2 text-black rounded-full focus:outline-none"
         />
-        <button className="absolute right-1 w-8 h-8 flex items-center justify-center bg-yellow-400 rounded-full">
+        <button className="absolute right-1 w-8 h-8 flex items-center justify-center ml-1 bg-yellow-400 rounded-full">
           <BsSearch className="text-xl text-black" />
         </button>
       </form>
@@ -42,7 +57,7 @@ export function Header() {
           <li>
             <Link href={'/cart'} className="relative flex flex-col items-center">
               <BsCart4 className="text-3xl" />
-              <div className="absolute right-1 -top-1 w-5 h-5 flex items-center justify-center bg-yellow-400 text-black font-medium border border-black rounded-full">
+              <div className="absolute right-0 -top-1 w-5 h-5 flex items-center justify-center bg-yellow-400 text-sm text-black font-medium border border-black rounded-full">
                 {totalItems}
               </div>
               <small>Cart</small>
