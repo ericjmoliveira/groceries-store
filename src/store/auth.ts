@@ -39,8 +39,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
   async handleSignIn(credentials: Credentials) {
     const data = await signIn(credentials);
 
-    console.log(data);
-
     if (data?.success) {
       set({ user: data.data?.user, authenticated: true });
       setToken(data.data?.token!);
