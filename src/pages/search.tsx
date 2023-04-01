@@ -6,10 +6,11 @@ import { Card } from '@/components/card';
 
 export default function Search() {
   const { query } = useRouter();
-  const keywords = query.query! as string;
+  const keywords = query?.query! as string;
 
+  const productsList = useProductsStore((state) => state.productsList);
   const searchProducts = useProductsStore((state) => state.searchProducts);
-  const searchResults = searchProducts(keywords.split('-'));
+  const searchResults = searchProducts(keywords?.split('-'))!;
 
   return (
     <>
@@ -17,9 +18,9 @@ export default function Search() {
         <title>Search</title>
       </Head>
       <h2 className="text-2xl font-semibold mb-8">
-        Your searched for: <em>{keywords.split('-').join(' ')}</em>
+        Your searched for: <em>{keywords?.split('-').join(' ')}</em>
       </h2>
-      {searchResults?.length! > 0 ? (
+      {productsList?.length! > 0 && searchResults?.length! > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {searchResults?.map((product) => {
             return <Card key={product.id} info={product} />;
