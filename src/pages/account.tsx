@@ -15,7 +15,7 @@ export default function Account() {
       </Head>
       <h2 className="text-2xl font-semibold">Account</h2>
       {!authenticated ? (
-        <section className="mt-8">
+        <section className="mt-8 flex flex-col gap-2">
           <p>
             <Link href={'/signin'} className="underline">
               Sign in
