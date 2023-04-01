@@ -29,7 +29,7 @@ export default function Account() {
       </Head>
       <h2 className="text-2xl font-semibold">Account</h2>
       {!authenticated ? (
-        <section className="mt-8 flex flex-col gap-2">
+        <section className="mt-8 flex flex-col gap-8">
           <p>
             <Link href={'/signin'} className="underline">
               Sign in
@@ -52,7 +52,7 @@ export default function Account() {
             <span>Joined in: {new Date(user?.createdAt!).toLocaleDateString()}</span>
           </div>
           <nav>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-8">
               <li>
                 <Link href={'/purchases'} className="underline">
                   Purchases
