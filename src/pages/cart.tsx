@@ -1,12 +1,30 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
+import { useAuthStore } from '@/store/auth';
 import { useCartStore } from '@/store/cart';
+import { createCheckoutSession } from '@/services/api';
 
 export default function Cart() {
   const { totalPrice, totalItems, itemsList } = useCartStore((state) => state.data);
   const handleCart = useCartStore((state) => state.handleCart);
+  const authenticated = useAuthStore((state) => state.authenticated);
+  const router = useRouter();
+
+  const handleCheckout = async () => {
+    if (!authenticated) return router.push('/signin');
+
+    const items = itemsList.map((item) => ({ id: item.id, quantity: item.quantity }));
+    const response = await createCheckoutSession(items);
+
+    if (response?.success) {
+      const url = response.data?.url;
+
+      if (url) window.location.href = url;
+    }
+  };
 
   return (
     <>
@@ -27,7 +45,10 @@ export default function Cart() {
         <section className="mt-8">
           <div className="flex items-center justify-between mb-8">
             <span className="text-2xl font-semibold">Total: ${totalPrice.toFixed(2)}</span>
-            <button className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-800 transition">
+            <button
+              onClick={handleCheckout}
+              className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-800 transition"
+            >
               Continue to checkout
             </button>
           </div>
