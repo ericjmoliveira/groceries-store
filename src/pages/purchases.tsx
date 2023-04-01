@@ -30,7 +30,7 @@ export default function Purchases() {
               <div className="flex flex-col mb-4 text-lg font-medium">
                 <span>Purchase ID: {purchase.id}</span>
                 <span>Purchase Date: {new Date(purchase.purchasedAt).toLocaleDateString()}</span>
-                <span>Total Price: ${purchase.data.totalPrice.toFixed(2)}</span>
+                <span>Total Price: ${(purchase.data.totalPrice / 100).toFixed(2)}</span>
                 <span>Total Items: {purchase.data.totalItems}</span>
               </div>
               <div>
@@ -47,7 +47,9 @@ export default function Purchases() {
                     </div>
                     <div className="flex items-center gap-8">
                       <span className="font-medium">Quantity: {item.quantity}</span>
-                      <span className="font-medium">Subtotal: ${item.subtotal.toFixed(2)}</span>
+                      <span className="font-medium">
+                        Subtotal: ${(item.subtotal / 100).toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 ))}
