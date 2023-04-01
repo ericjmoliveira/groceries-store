@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           price: product.price,
           image: product.image,
           quantity: itemsList.find((item) => item.id === product.id)?.quantity!,
-          subTotal: product.price * itemsList.find((item) => item.id === product.id)?.quantity!
+          subtotal: product.price * itemsList.find((item) => item.id === product.id)?.quantity!
         };
       });
 
