@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         };
       });
 
-      const data = { totalPrice, totalItems, orderedItems };
+      const data = { totalPrice, totalItems, itemsList: orderedItems };
 
       await prisma.purchase.create({ data: { userId, data } });
 
