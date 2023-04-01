@@ -34,6 +34,18 @@ export async function getUser() {
   }
 }
 
+export async function deleteUser() {
+  try {
+    const response = await api.delete('/users');
+
+    return response.data as Response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data as Response;
+    }
+  }
+}
+
 export async function signIn(credentials: Credentials) {
   try {
     const response = await api.post('/auth/signin', credentials);

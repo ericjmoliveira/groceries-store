@@ -2,11 +2,25 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import { useAuthStore } from '@/store/auth';
+import { deleteUser } from '@/services/api';
 
 export default function Account() {
   const user = useAuthStore((state) => state.user);
   const authenticated = useAuthStore((state) => state.authenticated);
   const handleSignOut = useAuthStore((state) => state.handleSignOut);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete your account?');
+
+    if (!confirmDelete) return;
+
+    const response = await deleteUser();
+
+    if (response?.success) {
+      alert(response.message);
+      handleSignOut();
+    }
+  };
 
   return (
     <>
@@ -47,6 +61,11 @@ export default function Account() {
               <li>
                 <button onClick={handleSignOut} className="underline">
                   Sign out
+                </button>
+              </li>
+              <li>
+                <button onClick={handleDelete} className="underline">
+                  Delete account
                 </button>
               </li>
             </ul>
