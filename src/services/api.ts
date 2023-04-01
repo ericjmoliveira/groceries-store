@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Credentials, Response } from '@/interfaces';
+import { Cart, Credentials, Response } from '@/interfaces';
 import { getToken } from '@/helpers/storage';
 
 const api = axios.create({ baseURL: '/api' });
@@ -49,6 +49,18 @@ export async function signIn(credentials: Credentials) {
 export async function signUp(credentials: Credentials) {
   try {
     const response = await api.post('/auth/signup', credentials);
+
+    return response.data as Response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.response?.data as Response;
+    }
+  }
+}
+
+export async function createCheckoutSession(itemsList: { id: string; quantity: number }[]) {
+  try {
+    const response = await api.post('/checkout', { itemsList });
 
     return response.data as Response;
   } catch (error) {
