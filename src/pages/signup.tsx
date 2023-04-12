@@ -1,36 +1,24 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { useAuthStore } from '@/store/auth';
+import { Form } from '@/interfaces';
 
 export default function SignUp() {
-  const formRefs = {
-    firstName: useRef<HTMLInputElement>(null),
-    lastName: useRef<HTMLInputElement>(null),
-    email: useRef<HTMLInputElement>(null),
-    password: useRef<HTMLInputElement>(null),
-    confirmPassword: useRef<HTMLInputElement>(null)
-  };
+  const { register, handleSubmit } = useForm<Form>();
 
   const authenticated = useAuthStore((state) => state.authenticated);
   const handleSignUp = useAuthStore((state) => state.handleSignUp);
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-
-    if (formRefs.password.current?.value! !== formRefs.confirmPassword.current?.value!) {
+  const handleForm = async (data: Form) => {
+    if (data.password !== data.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
 
-    await handleSignUp({
-      firstName: formRefs.firstName.current?.value!,
-      lastName: formRefs.lastName.current?.value!,
-      email: formRefs.email.current?.value!,
-      password: formRefs.password.current?.value!
-    });
+    await handleSignUp(data);
   };
 
   return (
@@ -44,7 +32,7 @@ export default function SignUp() {
             <Image src={'/spark.png'} width={30} height={30} alt="Wowmart spark" />
           </Link>
           <h2 className="text-lg font-semibold mb-8">Create your Wowmart account</h2>
-          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mb-4">
+          <form onSubmit={handleSubmit(handleForm)} className="w-full flex flex-col gap-4 mb-4">
             <section>
               <input
                 type="text"
@@ -52,7 +40,7 @@ export default function SignUp() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.firstName}
+                {...register('firstName')}
               />
             </section>
             <section>
@@ -62,7 +50,7 @@ export default function SignUp() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.lastName}
+                {...register('lastName')}
               />
             </section>
             <section>
@@ -72,7 +60,7 @@ export default function SignUp() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.email}
+                {...register('email')}
               />
             </section>
             <section>
@@ -82,7 +70,7 @@ export default function SignUp() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.password}
+                {...register('password')}
               />
             </section>
             <section>
@@ -92,7 +80,7 @@ export default function SignUp() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.confirmPassword}
+                {...register('confirmPassword')}
               />
             </section>
             <button className="flex items-center justify-center my-4 px-4 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-800 transition">

@@ -11,6 +11,14 @@ export interface Credentials {
   password: string;
 }
 
+export interface Form {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 export interface Item {
   id: string;
   name: string;

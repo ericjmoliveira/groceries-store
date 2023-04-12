@@ -1,26 +1,19 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { useAuthStore } from '@/store/auth';
+import { Form } from '@/interfaces';
 
 export default function SignIn() {
-  const formRefs = {
-    email: useRef<HTMLInputElement>(null),
-    password: useRef<HTMLInputElement>(null)
-  };
+  const { register, handleSubmit } = useForm<Form>();
 
   const authenticated = useAuthStore((state) => state.authenticated);
   const handleSignIn = useAuthStore((state) => state.handleSignIn);
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-
-    await handleSignIn({
-      email: formRefs.email.current?.value!,
-      password: formRefs.password.current?.value!
-    });
+  const handleForm = async (data: Form) => {
+    await handleSignIn(data);
   };
 
   return (
@@ -34,7 +27,7 @@ export default function SignIn() {
             <Image src={'/spark.png'} width={30} height={30} alt="Wowmart spark" />
           </Link>
           <h2 className="text-lg font-semibold mb-8">Sign in to your Wowmart account</h2>
-          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4 mb-4">
+          <form onSubmit={handleSubmit(handleForm)} className="w-full flex flex-col gap-4 mb-4">
             <section>
               <input
                 type="email"
@@ -42,7 +35,7 @@ export default function SignIn() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.email}
+                {...register('email')}
               />
             </section>
             <section>
@@ -52,7 +45,7 @@ export default function SignIn() {
                 autoComplete="off"
                 required
                 className="w-full px-4 py-2 bg-transparent border border-gray-500 rounded-lg"
-                ref={formRefs.password}
+                {...register('password')}
               />
             </section>
             <button className="flex items-center justify-center my-4 px-4 py-2 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-800 transition">
