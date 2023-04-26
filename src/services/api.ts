@@ -4,10 +4,13 @@ import { Cart, Credentials, Response } from '@/interfaces';
 import { getToken } from '@/helpers/storage';
 
 const api = axios.create({ baseURL: '/api' });
-const token = getToken();
 
-if (token) {
-  api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+function setAuthorizationHeader() {
+  const token = getToken();
+
+  if (token) {
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
 }
 
 export async function getProducts() {
@@ -23,6 +26,8 @@ export async function getProducts() {
 }
 
 export async function getUser() {
+  setAuthorizationHeader();
+  
   try {
     const response = await api.get('/users');
 
@@ -35,6 +40,8 @@ export async function getUser() {
 }
 
 export async function deleteUser() {
+  setAuthorizationHeader();
+  
   try {
     const response = await api.delete('/users');
 
@@ -71,6 +78,8 @@ export async function signUp(credentials: Credentials) {
 }
 
 export async function createCheckoutSession(itemsList: { id: string; quantity: number }[]) {
+  setAuthorizationHeader();
+  
   try {
     const response = await api.post('/checkout', { itemsList });
 
