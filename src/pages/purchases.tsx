@@ -42,7 +42,7 @@ export default function Purchases() {
                         <Link href={`/${item.slug}`} className="hover:underline">
                           {item.name}
                         </Link>
-                        <span className="font-medium">(${item.price}/ea)</span>
+                        <span className="font-medium">(${(item.price / 100).toFixed(2)}/ea)</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-8">
