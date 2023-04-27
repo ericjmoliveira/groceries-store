@@ -22,7 +22,13 @@ export default function Cart() {
     if (response?.success) {
       const url = response.data?.url;
 
-      if (url) window.location.href = url;
+      if (url) {
+        alert(
+          'In the checkout page, to simulate a successful purchase:\n\n1. Add an email (it can be any email with valid format)\n2. Add the following credit card number: 4242 4242 4242 4242\n3. Add any valid expiration date\n4. Add any CVC number\n5. Add the name on the card (it can be any name)'
+        );
+
+        window.location.href = url;
+      }
     }
   };
 
