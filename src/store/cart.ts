@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { toast } from 'react-toastify';
 
 import { getCart, removeCart, setCart } from '@/helpers/storage';
 import { useProductsStore } from './products';
@@ -47,6 +48,13 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
             newData.totalPrice += newOrder.price / 100;
           }
+
+          toast(`Added ${newOrder?.name} to the cart`, {
+            type: 'info',
+            position: 'bottom-right',
+            pauseOnHover: false,
+            autoClose: 3000
+          });
         } else {
           for (const item of newData.itemsList) {
             if (item.id === id) {
@@ -55,6 +63,13 @@ export const useCartStore = create<CartStore>((set, get) => ({
               newData.totalPrice += item.price!;
             }
           }
+
+          toast(`Added ${item.name} to the cart`, {
+            type: 'info',
+            position: 'bottom-right',
+            pauseOnHover: false,
+            autoClose: 3000
+          });
         }
 
         newData.totalItems++;
@@ -77,6 +92,13 @@ export const useCartStore = create<CartStore>((set, get) => ({
             if (item.quantity === 0) {
               newData.itemsList = newData.itemsList.filter((item) => item.id !== id);
             }
+
+            toast(`Removed ${item.name} to the cart`, {
+              type: 'info',
+              position: 'bottom-right',
+              pauseOnHover: false,
+              autoClose: 3000
+            });
           }
         }
       }

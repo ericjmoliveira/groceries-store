@@ -1,10 +1,12 @@
 import { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import { useCartStore } from '@/store/cart';
 import { useProductsStore } from '@/store/products';
 import { useAuthStore } from '@/store/auth';
 import { Layout } from '@/components/layout';
+import 'react-toastify/dist/ReactToastify.min.css';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -21,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <Component {...pageProps} />
+      <ToastContainer />
     </Layout>
   );
 }
