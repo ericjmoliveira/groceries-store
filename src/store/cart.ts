@@ -93,7 +93,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
               newData.itemsList = newData.itemsList.filter((item) => item.id !== id);
             }
 
-            toast(`Removed ${item.name} to the cart`, {
+            toast(`Removed ${item.name} from the cart`, {
               type: 'info',
               position: 'bottom-right',
               pauseOnHover: false,
