@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { useAuthStore } from '@/store/auth';
 import { deleteUser } from '@/services/api';
@@ -29,18 +30,27 @@ export default function Account() {
       </Head>
       <h2 className="text-2xl font-semibold">Account</h2>
       {!authenticated ? (
-        <section className="mt-8 flex flex-col gap-8">
-          <p>
-            <Link href={'/signin'} className="underline">
-              Sign in
-            </Link>
-          </p>
-          <p>
-            <Link href={'/signup'} className="underline">
-              Create an account
-            </Link>
-          </p>
-        </section>
+        <div className="flex flex-col items-center justify-center mt-32 md:mt-16">
+          <span className="text-lg font-semibold mb-4">Not signed in</span>
+          <Image src={'./empty-cart.svg'} width={250} height={250} alt="Empty cart" />
+          <ul className="flex flex-col items-center gap-4">
+            <li>
+              <Link href={'/signin'} className="underline">
+                Sign in
+              </Link>
+            </li>
+            <li>
+              <Link href={'/signup'} className="underline">
+                Create an account
+              </Link>
+            </li>
+            <li>
+              <Link href={'/'} className="underline">
+                Shop now
+              </Link>
+            </li>
+          </ul>
+        </div>
       ) : (
         <section>
           <div className="flex flex-col font-medium my-8">
