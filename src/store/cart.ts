@@ -111,7 +111,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
   clearCart() {
     removeCart();
     set({ data: initialState });
-    toast('REmoved all items from the cart', {
+    toast('Removed all items from the cart', {
       type: 'info',
       position: 'bottom-right',
       pauseOnHover: false,
