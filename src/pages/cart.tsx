@@ -10,6 +10,7 @@ import { createCheckoutSession } from '@/services/api';
 export default function Cart() {
   const { totalPrice, totalItems, itemsList } = useCartStore((state) => state.data);
   const handleCart = useCartStore((state) => state.handleCart);
+  const clearCart = useCartStore((state) => state.clearCart);
   const authenticated = useAuthStore((state) => state.authenticated);
   const router = useRouter();
 
@@ -38,6 +39,11 @@ export default function Cart() {
         <title>Cart</title>
       </Head>
       <h2 className="text-2xl font-semibold">Cart ({totalItems} items)</h2>
+      {totalItems !== 0 && (
+        <button className="underline" onClick={clearCart}>
+          Clear cart
+        </button>
+      )}
       {totalItems === 0 ? (
         <div className="flex flex-col items-center justify-center mt-32 md:mt-16">
           <span className="text-lg font-semibold mb-4">Time to start shopping!</span>
