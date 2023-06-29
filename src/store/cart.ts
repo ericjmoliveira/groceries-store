@@ -51,7 +51,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
           toast(`Added ${newOrder?.name} to the cart`, {
             type: 'info',
-            position: 'bottom-right',
+            position: 'bottom-center',
             pauseOnHover: false,
             autoClose: 3000
           });
@@ -63,13 +63,6 @@ export const useCartStore = create<CartStore>((set, get) => ({
               newData.totalPrice += item.price!;
             }
           }
-
-          toast(`Added ${item.name} to the cart`, {
-            type: 'info',
-            position: 'bottom-right',
-            pauseOnHover: false,
-            autoClose: 3000
-          });
         }
 
         newData.totalItems++;
@@ -91,14 +84,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
             if (item.quantity === 0) {
               newData.itemsList = newData.itemsList.filter((item) => item.id !== id);
-            }
 
-            toast(`Removed ${item.name} from the cart`, {
-              type: 'info',
-              position: 'bottom-right',
-              pauseOnHover: false,
-              autoClose: 3000
-            });
+              toast(`Removed ${item.name} from the cart`, {
+                type: 'info',
+                position: 'bottom-center',
+                pauseOnHover: false,
+                autoClose: 3000
+              });
+            }
           }
         }
       }
@@ -113,7 +106,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     set({ data: initialState });
     toast('Removed all items from the cart', {
       type: 'info',
-      position: 'bottom-right',
+      position: 'bottom-center',
       pauseOnHover: false,
       autoClose: 3000
     });
